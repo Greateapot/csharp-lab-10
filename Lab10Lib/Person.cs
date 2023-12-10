@@ -25,7 +25,7 @@ namespace Lab10Lib
         {
             get => name ?? "--";
             set => name = (value.Length == 0)
-                ? throw new ArgumentException("empty name")
+                ? throw new ArgumentException("Указано невозможное имя")
                 : value;
         }
 
@@ -35,7 +35,7 @@ namespace Lab10Lib
         {
             get => age;
             set => age = (value < 1 || value > 120)
-                ? throw new ArgumentException("impos age")
+                ? throw new ArgumentException("Указан невозможный возраст")
                 : value;
         }
 
@@ -44,8 +44,7 @@ namespace Lab10Lib
         public void Show() => ConsoleIO.WriteLine(GetString());
 
         public override bool Equals(object? obj) =>
-            obj != null
-            && obj is Person person
+            obj is Person person
             && person.Name == Name
             && person.Age == Age
             && person.BestFriend == BestFriend;
@@ -62,7 +61,7 @@ namespace Lab10Lib
         {
             Name = ConsoleIO.InputRaw("Введите имя: ");
             Age = ConsoleIO.Input<int>(
-                "Введите возраст: ",
+                "Введите возраст (1 <= A <= 120): ",
                 v => v < 1 || v > 120 ? "Указан невозможный возраст" : null
             );
         }
@@ -73,17 +72,9 @@ namespace Lab10Lib
             Age = RandomContent.GetAge();
         }
 
-        public int CompareTo(object? obj)
-        {
-            if (obj is Person person)
-            {
-                return Name.CompareTo(person.Name);
-            }
-            else
-            {
-                throw new ArgumentException("obj is not Person");
-            }
-        }
+        public int CompareTo(object? obj) => (obj is Person person)
+            ? Name.CompareTo(person.Name)
+            : throw new ArgumentException("Сравниваемый элемент не является классом (или наследником класса) Person");
 
         public virtual Person ShallowCopy()
             => (Person)MemberwiseClone();

@@ -12,8 +12,9 @@ namespace Lab10Lib
             int age,
             string group,
             float rating,
-            int course
-        ) : base(name, age)
+            int course,
+            Person? bestFriend = null 
+        ) : base(name, age, bestFriend)
         {
             Group = group;
             Rating = rating;
@@ -26,7 +27,7 @@ namespace Lab10Lib
         {
             get => group ?? "--";
             set => group = (value.Length == 0)
-                ? throw new ArgumentException("impos group")
+                ? throw new ArgumentException("Невозможная группа")
                 : value;
         }
 
@@ -36,7 +37,7 @@ namespace Lab10Lib
         {
             get => rating;
             set => rating = (value < 0 || value > 5)
-                ? throw new ArgumentException("impos rating")
+                ? throw new ArgumentException("Невозможный рейтинг")
                 : value;
         }
         private int course;
@@ -44,8 +45,8 @@ namespace Lab10Lib
         public int Course
         {
             get => course;
-            set => course = (value < 0 || value > 6)
-                ? throw new ArgumentException("impos course")
+            set => course = (value < 1 || value > 6)
+                ? throw new ArgumentException("Невозможный курс")
                 : value;
         }
 
@@ -54,19 +55,19 @@ namespace Lab10Lib
         public new void Show() => ConsoleIO.WriteLine(GetString());
 
         public override bool Equals(object? obj) =>
-            obj != null
-            && obj is Student student
+            obj is Student student
             && student.Name == Name
             && student.Age == Age
             && student.Group == Group
             && student.Rating == Rating
-            && student.Course == Course;
+            && student.Course == Course
+            && student.BestFriend == BestFriend;
 
         public override int GetHashCode() =>
             (Name, Age, Group, Rating, Course).GetHashCode();
 
         public new string GetString() =>
-            $"Student(name: {Name}, age: {Age}, group: {Group}, rating: {Rating:F2}, course: {Course})";
+            $"Student(name: {Name}, age: {Age}, group: {Group}, rating: {Rating:F2}, course: {Course}, bestFriend: {(BestFriend == null ? "null" : BestFriend)})";
 
         public override string ToString() => GetString();
 
@@ -75,11 +76,11 @@ namespace Lab10Lib
             base.Init();
             Group = ConsoleIO.InputRaw("Введите группу: ");
             Rating = ConsoleIO.Input<float>(
-                "Введите рейтинг: ",
+                "Введите рейтинг (0.0 <= R <= 5.0): ",
                 v => v < 0 || v > 5 ? "Указан невозможный рейтинг" : null
             );
             Course = ConsoleIO.Input<int>(
-                "Введите возраст: ",
+                "Введите курс (1 <= R <= 6): ",
                 v => v < 1 || v > 6 ? "Указан невозможный курс" : null
             );
         }
@@ -96,6 +97,18 @@ namespace Lab10Lib
             => (Student)MemberwiseClone();
 
         public override object Clone()
-            => new Student(Name, Age, Group, Rating, Course);
+            => new Student(
+                Name, 
+                Age, 
+                Group, 
+                Rating, 
+                Course,
+                BestFriend != null
+                    ? new Person(
+                        BestFriend.Name,
+                        BestFriend.Age
+                    )
+                    : null
+            );
     }
 }

@@ -10,8 +10,9 @@ namespace Lab10Lib
             string name,
             int age,
             int grade,
-            float rating
-        ) : base(name, age)
+            float rating,
+            Person? bestFriend = null
+        ) : base(name, age, bestFriend)
         {
             Grade = grade;
             Rating = rating;
@@ -21,8 +22,8 @@ namespace Lab10Lib
         public int Grade
         {
             get => grade;
-            set => grade = (value < 0 || value > 11)
-                ? throw new ArgumentException("impos grade")
+            set => grade = (value < 1 || value > 11)
+                ? throw new ArgumentException("Невозможный класс")
                 : value;
         }
 
@@ -32,7 +33,7 @@ namespace Lab10Lib
         {
             get => rating;
             set => rating = (value < 0 || value > 5)
-                ? throw new ArgumentException("impos rating")
+                ? throw new ArgumentException("Невозможный рейтинг")
                 : value;
         }
 
@@ -41,18 +42,18 @@ namespace Lab10Lib
         public new void Show() => ConsoleIO.WriteLine(GetString());
 
         public override bool Equals(object? obj) =>
-            obj != null
-            && obj is Pupil pupil
+            obj is Pupil pupil
             && pupil.Name == Name
             && pupil.Age == Age
             && pupil.Grade == Grade
-            && pupil.Rating == Rating;
+            && pupil.Rating == Rating
+            && pupil.BestFriend == BestFriend;
 
         public override int GetHashCode() =>
             (Name, Age, Grade, Rating).GetHashCode();
 
         public new string GetString() =>
-            $"Pupil(name: {Name}, age: {Age}, grade: {Grade}, rating: {Rating:F2})";
+            $"Pupil(name: {Name}, age: {Age}, grade: {Grade}, rating: {Rating:F2}, bestFriend: {(BestFriend == null ? "null" : BestFriend)})";
 
         public override string ToString() => GetString();
 
@@ -60,11 +61,11 @@ namespace Lab10Lib
         {
             base.Init();
             Grade = ConsoleIO.Input<int>(
-                "Введите класс: ",
+                "Введите класс (1 <= C <= 11): ",
                 v => v > 11 ? "Указан несуществующий класс" : null
             );
             Rating = ConsoleIO.Input<float>(
-                "Введите рейтинг: ",
+                "Введите рейтинг (0.0 <= R <= 5.0): ",
                 v => v < 0 || v > 5 ? "Указан невозможный рейтинг" : null
             );
         }
@@ -80,6 +81,17 @@ namespace Lab10Lib
             => (Pupil)MemberwiseClone();
 
         public override object Clone()
-            => new Pupil(Name, Age, Grade, Rating);
+            => new Pupil(
+                Name,
+                Age,
+                Grade,
+                Rating,
+                BestFriend != null
+                    ? new Person(
+                        BestFriend.Name,
+                        BestFriend.Age
+                    )
+                    : null
+            );
     }
 }

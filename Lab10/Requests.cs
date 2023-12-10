@@ -1,5 +1,3 @@
-using Lab10Lib;
-
 namespace Lab10
 {
     public static class Requests
@@ -46,11 +44,12 @@ namespace Lab10
             Person? result = null;
 
             foreach (var person in persons)
-                if (person is Student student && student.Rating > rating) {
+                if (person is Student student && student.Rating > rating)
+                {
                     rating = student.Rating;
                     result = student;
                 }
-            
+
             return result;
         }
 

@@ -20,8 +20,7 @@ namespace Lab10Lib
         }
 
         public override bool Equals(object? obj) =>
-            obj != null
-            && obj is SomeClass someClass
+            obj is SomeClass someClass
             && someClass.SomeProperty == SomeProperty;
 
         public override int GetHashCode() =>
@@ -31,7 +30,7 @@ namespace Lab10Lib
             $"SomeClass(someProperty: {SomeProperty})";
 
         public void Init()
-            => SomeProperty = ConsoleIO.InputRaw("Введите какое-то свойство (текст): ");
+            => SomeProperty = ConsoleIO.InputRaw("Введите какое-то свойство (строка): ");
 
         public void RandomInit()
             => SomeProperty = RandomContent.GetGroup();

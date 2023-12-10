@@ -12,8 +12,9 @@ namespace Lab10Lib
             string group,
             float rating,
             int course,
-            bool isShortenedProgram
-        ) : base(name, age, group, rating, course)
+            bool isShortenedProgram,
+            Person? bestFriend = null
+        ) : base(name, age, group, rating, course, bestFriend)
         {
             IsShortenedProgram = isShortenedProgram;
         }
@@ -25,21 +26,21 @@ namespace Lab10Lib
         public new void Show() => ConsoleIO.WriteLine(GetString());
 
         public override bool Equals(object? obj) =>
-            obj != null
-            && obj is PartTimeStudent partTimeStudent
+            obj is PartTimeStudent partTimeStudent
             && partTimeStudent.Name == Name
             && partTimeStudent.Age == Age
             && partTimeStudent.Group == Group
             && partTimeStudent.Rating == Rating
             && partTimeStudent.Course == Course
-            && partTimeStudent.IsShortenedProgram == IsShortenedProgram;
+            && partTimeStudent.IsShortenedProgram == IsShortenedProgram
+            && partTimeStudent.BestFriend == BestFriend;
 
         public override int GetHashCode() =>
             (Name, Age, Group, Rating, Course, IsShortenedProgram).GetHashCode();
 
         public new string GetString() =>
             $"PartTimeStudent(name: {Name}, age: {Age}, group: {Group}, rating: {Rating:F2}, "
-            + $"course: {Course}, isShortenedProgram: {IsShortenedProgram})";
+            + $"course: {Course}, isShortenedProgram: {IsShortenedProgram}, bestFriend: {(BestFriend == null ? "null" : BestFriend)})";
 
         public override string ToString() => GetString();
 
@@ -62,6 +63,19 @@ namespace Lab10Lib
             => (PartTimeStudent)MemberwiseClone();
 
         public override object Clone()
-            => new PartTimeStudent(Name, Age, Group, Rating, Course, IsShortenedProgram);
+            => new PartTimeStudent(
+                Name,
+                Age,
+                Group,
+                Rating,
+                Course,
+                IsShortenedProgram,
+                BestFriend != null
+                    ? new Person(
+                        BestFriend.Name,
+                        BestFriend.Age
+                    )
+                    : null
+            );
     }
 }

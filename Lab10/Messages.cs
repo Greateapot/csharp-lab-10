@@ -31,11 +31,20 @@ namespace Lab10
         public const string ClonedObject = "\nСклонированный объект: {0}";
         public const string CopiedObject = "\nПоверхностно скопированный объект: {0}";
         public const string InputLength = "Введите длину: ";
-public const string SearchInputPersonData = "\nВведите данные искомой персоны: ";
-public const string SearchPersonNotFound = "\nПерсона с заданными критериями не найдена.";
-public const string SearchPersonFound = "\nНомер персоны с заданными критериями в списке: {0}";
-public const string InputRating = "Введите рейтинг (0,0 <= Р <= 5,0): ";
-public const string InputRatingValidatorError = "Введен некорректный рейтинг.";
-
+        public const string SearchInputPersonData = "\nВведите данные искомой персоны: ";
+        public const string SearchPersonNotFound = "\nПерсона с заданными критериями не найдена.";
+        public const string SearchPersonFound = "\nНомер персоны с заданными критериями в списке: {0}";
+        public const string InputRating = "Введите рейтинг (0,0 <= R <= 5,0): ";
+        public const string InputRatingValidatorError = "Введен некорректный рейтинг.";
+        public const string ChoiceInputMethodDialogWelcomeText = "Выберите метод ввода массива:";
+        public const string ChoiceInputMethodDialogManual = "Вручную";
+        public const string ChoiceInputMethodDialogRandom = "Случайно";
+        public const string ChoiceInputMethodDialogCancel = "Отмена";
+        public const string ChoicePersonType = "Выберите тип персоны:"
+            + "\n1. Персона (Person)"
+            + "\n2. Ученик (Pupil)"
+            + "\n3. Студент (Student)"
+            + "\n4. Студент-заочник (PartTimeStudent)"
+            + "\nВвод: ";
     }
 }

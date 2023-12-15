@@ -1,3 +1,5 @@
+using Lab10Lib.Entities;
+
 namespace Lab10LibTests
 {
     public class PropertiesTests
@@ -37,11 +39,9 @@ namespace Lab10LibTests
             Pupil pupil = new();
 
             // act
-            void action1() => pupil.Grade = 12;
-            void action2() => pupil.Grade = 0;
+            void action2() => pupil.SchoolID = 0;
 
             // assert
-            Assert.Throws<ArgumentException>(action1);
             Assert.Throws<ArgumentException>(action2);
         }
 
@@ -61,31 +61,16 @@ namespace Lab10LibTests
         }
 
         [Fact]
-        public void StudentGroup()
-        {
-            // arrange
-            Student student = new();
-
-            // act
-            void action1() => student.Group = "";
-
-            // assert
-            Assert.Throws<ArgumentException>(action1);
-        }
-
-        [Fact]
         public void StudentCourse()
         {
             // arrange
             Student student = new();
 
             // act
-            void action1() => student.Course = 0;
-            void action2() => student.Course = 7;
+            void action1() => student.UniversityID = 0;
 
             // assert
             Assert.Throws<ArgumentException>(action1);
-            Assert.Throws<ArgumentException>(action2);
         }
 
         [Fact]

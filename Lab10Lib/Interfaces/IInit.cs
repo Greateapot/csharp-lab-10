@@ -1,4 +1,4 @@
-namespace Lab10Lib
+namespace Lab10Lib.Interfaces
 {
     public interface IInit
     {

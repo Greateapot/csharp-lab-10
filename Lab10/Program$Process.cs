@@ -1,3 +1,7 @@
+using Lab10Lib.Entities;
+using Lab10Lib.Interfaces;
+using Lab10Lib.Utilities;
+
 namespace Lab10
 {
     public static partial class Program
@@ -96,12 +100,13 @@ namespace Lab10
                 return;
             }
             var persons = CreatePersonArray(isRandom);
+            Array.Sort(persons);
             PrintPersonArray(Messages.Persons, persons);
 
             ConsoleIO.WriteLine(Messages.SearchInputPersonData);
             var person = new Person();
             person.Init();
-
+            
             var index = Array.BinarySearch(persons, person);
             ConsoleIO.WriteLineFormat(
                 index < 0
@@ -132,8 +137,7 @@ namespace Lab10
 
         public static void Task3Option4Process()
         {
-            var p1 = new Person("Михаил", 21);
-            var p2 = new Person("Вячеслав", 22, p1);
+            var p2 = new Person("Будин", "Данил", "Батькович", 19, new() { "Xeosha" });
 
             ConsoleIO.WriteLineFormat(Messages.SourceObject, p2);
 

@@ -30,7 +30,7 @@ namespace Lab10
         public const string SourceObject = "\nИсходный объект: {0}";
         public const string ClonedObject = "\nСклонированный объект: {0}";
         public const string CopiedObject = "\nПоверхностно скопированный объект: {0}";
-        public const string InputLength = "Введите длину: ";
+        public const string InputLength = "Введите кол-во персон: ";
         public const string SearchInputPersonData = "\nВведите данные искомой персоны: ";
         public const string SearchPersonNotFound = "\nПерсона с заданными критериями не найдена.";
         public const string SearchPersonFound = "\nНомер персоны с заданными критериями в списке: {0}";

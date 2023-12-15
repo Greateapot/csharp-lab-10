@@ -1,3 +1,5 @@
+using Lab10Lib.Entities;
+
 namespace Lab10
 {
     public static partial class Program
